@@ -3,165 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f5f7fa; color: #333; }
-        .navbar { background: white; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: #4a6fa5; }
-        .nav-menu { display: flex; list-style: none; }
-        .nav-menu li { margin-left: 20px; }
-        .nav-menu a { text-decoration: none; color: #555; font-weight: 600; }
-        .hero { padding: 80px 0; text-align: center; }
-        .section { padding: 60px 0; }
-        .calculator { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .calc-screen { background: #f0f0f0; padding: 20px; font-size: 24px; text-align: right; margin-bottom: 15px; border-radius: 5px; }
-        .calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-        .calc-btn { padding: 15px; border: none; background: #e0e0e0; border-radius: 5px; cursor: pointer; font-size: 18px; }
-        .calc-btn.operator { background: #4a6fa5; color: white; }
-        footer { background: #333; color: white; text-align: center; padding: 30px 0; margin-top: 50px; }
-        
-        @media (max-width: 768px) {
-            .nav-content { flex-direction: column; }
-            .nav-menu { margin-top: 15px; }
-            .nav-menu li { margin: 0 10px; }
-        }
-    </style>
+    <title>John Designer | Creative Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p>Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Cursor Effect -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="container nav-content">
-            <div class="logo">
-                <span style="margin-right:10px;">⭐</span> MyPortfolio
+        <div class="container">
+            <div class="nav-container">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bezier-curve"></i>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-primary">JD</span>
+                        <span class="logo-secondary">Design</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="showroom.html" class="nav-link">
+                            <i class="fas fa-palette"></i>
+                            <span>Showroom</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="calculator.html" class="nav-link">
+                            <i class="fas fa-tools"></i>
+                            <span>Tools</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="calculator.html" class="dropdown-item">
+                                <i class="fas fa-calculator"></i>
+                                <span>Calculator</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-ruler-combined"></i>
+                                <span>Measurements</span>
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-fill-drip"></i>
+                                <span>Color Picker</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Mobile Menu Toggle -->
+                <div class="mobile-toggle" id="mobileToggle">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#showroom">Showroom</a></li>
-                <li><a href="#tools">Tools</a></li>
-            </ul>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
+    <section class="hero">
         <div class="container">
-            <h1>Welcome to My Portfolio</h1>
-            <p>Designer & Developer creating amazing digital experiences</p>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Hello! I'm a passionate designer and developer with expertise in 3D/2D design and web development.</p>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section class="section" id="tools">
-        <div class="container">
-            <h2>Calculator Tool</h2>
-            <div class="calculator">
-                <div class="calc-screen" id="screen">0</div>
-                <div class="calc-buttons">
-                    <button class="calc-btn" onclick="clearScreen()">C</button>
-                    <button class="calc-btn" onclick="backspace()">CE</button>
-                    <button class="calc-btn operator" onclick="append('/')">/</button>
-                    <button class="calc-btn operator" onclick="append('*')">×</button>
-                    
-                    <button class="calc-btn" onclick="append('7')">7</button>
-                    <button class="calc-btn" onclick="append('8')">8</button>
-                    <button class="calc-btn" onclick="append('9')">9</button>
-                    <button class="calc-btn operator" onclick="append('-')">-</button>
-                    
-                    <button class="calc-btn" onclick="append('4')">4</button>
-                    <button class="calc-btn" onclick="append('5')">5</button>
-                    <button class="calc-btn" onclick="append('6')">6</button>
-                    <button class="calc-btn operator" onclick="append('+')">+</button>
-                    
-                    <button class="calc-btn" onclick="append('1')">1</button>
-                    <button class="calc-btn" onclick="append('2')">2</button>
-                    <button class="calc-btn" onclick="append('3')">3</button>
-                    <button class="calc-btn operator" onclick="calculate()">=</button>
-                    
-                    <button class="calc-btn" onclick="append('0')">0</button>
-                    <button class="calc-btn" onclick="append('.')">.</button>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h6 class="hero-subtitle">Hello, I'm</h6>
+                    <h1 class="hero-title">
+                        <span class="text-gradient">John</span>
+                        <span class="text-gradient">Designer</span>
+                    </h1>
+                    <h2 class="hero-role">Creative Designer & 3D Artist</h2>
+                    <p class="hero-description">
+                        I create immersive digital experiences through innovative design, 
+                        3D modeling, and interactive web solutions. Passionate about 
+                        blending aesthetics with functionality.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="showroom.html" class="btn btn-primary">
+                            <span>View My Work</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-outline">
+                            <span>Contact Me</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-container">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="John Designer" class="profile-image">
+                        <div class="image-overlay"></div>
+                        <div class="floating-elements">
+                            <div class="floating-element element-1">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div class="floating-element element-2">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <div class="floating-element element-3">
+                                <i class="fas fa-code"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
+    <!-- Skills Preview -->
+    <section class="skills-preview">
         <div class="container">
-            <p>&copy; 2023 My Portfolio. Published on GitHub Pages.</p>
-            <p>Site URL: <span id="siteUrl"></span></p>
+            <div class="section-header">
+                <h6 class="section-subtitle">Expertise</h6>
+                <h2 class="section-title">Core Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card" data-aos="fade-up">
+                    <div class="skill-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3 class="skill-title">3D Modeling</h3>
+                    <p class="skill-description">
+                        Creating realistic 3D models and animations using Blender, Maya, and ZBrush.
+                    </p>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                        <span class="progress-text">90%</span>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="skill-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="skill-title">UI/UX Design</h3>
+                    <p class="skill-description">
+                        Designing intuitive user interfaces and engaging user experiences.
+                    </p>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                        <span class="progress-text">85%</span>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="skill-title">Web Development</h3>
+                    <p class="skill-description">
+                        Building responsive websites and web applications with modern technologies.
+                    </p>
+                    <div class="skill-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                        <span class="progress-text">80%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section class="featured-projects">
+        <div class="container">
+            <div class="section-header">
+                <h6 class="section-subtitle">Portfolio</h6>
+                <h2 class="section-title">Featured Projects</h2>
+                <a href="showroom.html" class="view-all">
+                    View All Projects
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="3D Sculpture Project">
+                        <div class="project-overlay">
+                            <a href="showroom.html" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">3D Design</span>
+                        <h3 class="project-title">Abstract Sculpture Series</h3>
+                        <p class="project-description">
+                            A collection of modern 3D sculptures exploring organic forms.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="UI Design Project">
+                        <div class="project-overlay">
+                            <a href="showroom.html" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">UI/UX</span>
+                        <h3 class="project-title">Fitness App Design</h3>
+                        <p class="project-description">
+                            Complete mobile application design with interactive prototypes.
+                        </p>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Architecture Visualization">
+                        <div class="project-overlay">
+                            <a href="showroom.html" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">Visualization</span>
+                        <h3 class="project-title">Modern Villa Render</h3>
+                        <p class="project-description">
+                            Photorealistic 3D visualization of contemporary architecture.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Bring Your Ideas to Life?</h2>
+                <p class="cta-description">
+                    Let's collaborate on your next project. I'm available for freelance work and creative collaborations.
+                </p>
+                <a href="contact.html" class="btn btn-light">
+                    <span>Start a Project</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="index.html" class="footer-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-bezier-curve"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-primary">JD</span>
+                            <span class="logo-secondary">Design</span>
+                        </div>
+                    </a>
+                    <p class="footer-description">
+                        Creating digital experiences that inspire and engage through innovative design and technology.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Behance">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Dribbble">
+                            <i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="showroom.html">Showroom</a></li>
+                        <li><a href="calculator.html">Tools</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">3D Modeling</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Brand Identity</a></li>
+                        <li><a href="#">Motion Graphics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>hello@johndesigner.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>San Francisco, CA</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 John Designer. All rights reserved.</p>
+                <p>Published on <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
+            </div>
         </div>
     </footer>
 
-    <script>
-        // Calculator Functions
-        let screen = document.getElementById('screen');
-        let currentInput = '0';
-        
-        function append(value) {
-            if (currentInput === '0') {
-                currentInput = value;
-            } else {
-                currentInput += value;
-            }
-            screen.textContent = currentInput;
-        }
-        
-        function clearScreen() {
-            currentInput = '0';
-            screen.textContent = currentInput;
-        }
-        
-        function backspace() {
-            if (currentInput.length > 1) {
-                currentInput = currentInput.slice(0, -1);
-            } else {
-                currentInput = '0';
-            }
-            screen.textContent = currentInput;
-        }
-        
-        function calculate() {
-            try {
-                // Replace × with * for calculation
-                let expression = currentInput.replace('×', '*');
-                let result = eval(expression);
-                currentInput = result.toString();
-                screen.textContent = currentInput;
-            } catch (error) {
-                screen.textContent = 'Error';
-                currentInput = '0';
-            }
-        }
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Display site URL in footer
-        document.getElementById('siteUrl').textContent = window.location.href;
-    </script>
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
