@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f7fa; color: #333; }
+        .navbar { background: white; padding: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; font-size: 24px; font-weight: bold; color: #4a6fa5; }
+        .nav-menu { display: flex; list-style: none; }
+        .nav-menu li { margin-left: 20px; }
+        .nav-menu a { text-decoration: none; color: #555; font-weight: 600; }
+        .hero { padding: 80px 0; text-align: center; }
+        .section { padding: 60px 0; }
+        .calculator { max-width: 400px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .calc-screen { background: #f0f0f0; padding: 20px; font-size: 24px; text-align: right; margin-bottom: 15px; border-radius: 5px; }
+        .calc-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .calc-btn { padding: 15px; border: none; background: #e0e0e0; border-radius: 5px; cursor: pointer; font-size: 18px; }
+        .calc-btn.operator { background: #4a6fa5; color: white; }
+        footer { background: #333; color: white; text-align: center; padding: 30px 0; margin-top: 50px; }
+        
+        @media (max-width: 768px) {
+            .nav-content { flex-direction: column; }
+            .nav-menu { margin-top: 15px; }
+            .nav-menu li { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">
+                <span style="margin-right:10px;">⭐</span> MyPortfolio
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#showroom">Showroom</a></li>
+                <li><a href="#tools">Tools</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Welcome to My Portfolio</h1>
+            <p>Designer & Developer creating amazing digital experiences</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Hello! I'm a passionate designer and developer with expertise in 3D/2D design and web development.</p>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="section" id="tools">
+        <div class="container">
+            <h2>Calculator Tool</h2>
+            <div class="calculator">
+                <div class="calc-screen" id="screen">0</div>
+                <div class="calc-buttons">
+                    <button class="calc-btn" onclick="clearScreen()">C</button>
+                    <button class="calc-btn" onclick="backspace()">CE</button>
+                    <button class="calc-btn operator" onclick="append('/')">/</button>
+                    <button class="calc-btn operator" onclick="append('*')">×</button>
+                    
+                    <button class="calc-btn" onclick="append('7')">7</button>
+                    <button class="calc-btn" onclick="append('8')">8</button>
+                    <button class="calc-btn" onclick="append('9')">9</button>
+                    <button class="calc-btn operator" onclick="append('-')">-</button>
+                    
+                    <button class="calc-btn" onclick="append('4')">4</button>
+                    <button class="calc-btn" onclick="append('5')">5</button>
+                    <button class="calc-btn" onclick="append('6')">6</button>
+                    <button class="calc-btn operator" onclick="append('+')">+</button>
+                    
+                    <button class="calc-btn" onclick="append('1')">1</button>
+                    <button class="calc-btn" onclick="append('2')">2</button>
+                    <button class="calc-btn" onclick="append('3')">3</button>
+                    <button class="calc-btn operator" onclick="calculate()">=</button>
+                    
+                    <button class="calc-btn" onclick="append('0')">0</button>
+                    <button class="calc-btn" onclick="append('.')">.</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 My Portfolio. Published on GitHub Pages.</p>
+            <p>Site URL: <span id="siteUrl"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Calculator Functions
+        let screen = document.getElementById('screen');
+        let currentInput = '0';
+        
+        function append(value) {
+            if (currentInput === '0') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            screen.textContent = currentInput;
+        }
+        
+        function clearScreen() {
+            currentInput = '0';
+            screen.textContent = currentInput;
+        }
+        
+        function backspace() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            screen.textContent = currentInput;
+        }
+        
+        function calculate() {
+            try {
+                // Replace × with * for calculation
+                let expression = currentInput.replace('×', '*');
+                let result = eval(expression);
+                currentInput = result.toString();
+                screen.textContent = currentInput;
+            } catch (error) {
+                screen.textContent = 'Error';
+                currentInput = '0';
+            }
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Display site URL in footer
+        document.getElementById('siteUrl').textContent = window.location.href;
+    </script>
+</body>
+</html>
